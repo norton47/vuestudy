@@ -8,12 +8,28 @@
     <script src="https://unpkg.com/vue@2.2.5">
     </script>
     <div id="app">
-        <h1 v-once>{{ title }}</h1>
-        <h1 v-once>{{ title }}</h1>
-        <h1>{{ title }}</h1>
-        <p>{{ sayHello() }} - <a v-bind:href="link">Google</a></p>
-        <hr>
-        <p v-html="finishedLink"></p>
+
+        <!--binding-->
+        <input type="text" v-model="name">
+        <p>{{ name }}</p>
+
+       <button v-on:click="increase(5)">Click</button>
+       <button v-on:click="counter++">Click</button>
+        <p>{{ counter }}</p>
+        <p v-on:mousemove="updateCoordinates">Coord: {{x}} / {{y}}
+            - <span v-on:mousemove.stop="">Dead spot</span>
+        </p>
+
+        <input type="text" v-on:keyup.enter.space="alertMe">
+        <br>
+        <br>
+        <br>
+        <br>
+
+        <button v-on:click="counterNew++"> Инкримент </button>
+        <button v-on:click="counterNew--"> Дикримент </button>
+        <p>{{ counterNew }}</p>
+        <p>{{ output }}</p>
     </div>
     <script src="app.js"></script>
 </body>
