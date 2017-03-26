@@ -10,28 +10,19 @@
     </script>
     <div id="app">
 
-        <div class="demo" :style="{backgroundColor: color}"></div>
-        <div class="demo" :style="myStyle"></div>
-        <div class="demo" :style="[myStyle, {height: width + 'px'}]"></div>
-        <input type="text" v-model="color">
-        <input type="text" v-model="width">
+        <p v-if="show">You can see me!</p>
+        <p v-else> Naw you can see me!</p>
+        <p v-show="show">Do you also see me?</p>
 
-        <br>
-        <br>
-        <br>
-        <br>
+        <template v-if="show">
+            <h1> Heading </h1>
+            <p> Inside a template </p>
+        </template>
 
-        <div class="demo"
-             @click="attachRed = !attachRed"
-             :class="divClasses">
+        <button @click="show =!show">Swich</button>
 
-        </div>
-        <div class="demo"
-             :class="{red: attachRed}"></div>
-        <div class="demo" :class="[color, {red: attachRed}]"></div>
 
     </div>
-
     <script src="app.js"></script>
 </body>
 </html>
