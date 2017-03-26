@@ -3,34 +3,35 @@
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
     <script src="https://unpkg.com/vue@2.2.5">
     </script>
     <div id="app">
 
-        <!--binding-->
-        <input type="text" v-model="name">
-        <p>{{ name }}</p>
+        <div class="demo" :style="{backgroundColor: color}"></div>
+        <div class="demo" :style="myStyle"></div>
+        <div class="demo" :style="[myStyle, {height: width + 'px'}]"></div>
+        <input type="text" v-model="color">
+        <input type="text" v-model="width">
 
-       <button v-on:click="increase(5)">Click</button>
-       <button v-on:click="counter++">Click</button>
-        <p>{{ counter }}</p>
-        <p v-on:mousemove="updateCoordinates">Coord: {{x}} / {{y}}
-            - <span v-on:mousemove.stop="">Dead spot</span>
-        </p>
-
-        <input type="text" v-on:keyup.enter.space="alertMe">
         <br>
         <br>
         <br>
         <br>
 
-        <button v-on:click="counterNew++"> Инкримент </button>
-        <button v-on:click="counterNew--"> Дикримент </button>
-        <p>{{ counterNew }}</p>
-        <p>{{ output }}</p>
+        <div class="demo"
+             @click="attachRed = !attachRed"
+             :class="divClasses">
+
+        </div>
+        <div class="demo"
+             :class="{red: attachRed}"></div>
+        <div class="demo" :class="[color, {red: attachRed}]"></div>
+
     </div>
+
     <script src="app.js"></script>
 </body>
 </html>
