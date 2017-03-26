@@ -6,23 +6,42 @@
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <script src="https://unpkg.com/vue@2.2.5">
-    </script>
-    <div id="app">
+<script src="https://unpkg.com/vue@2.2.5">
+</script>
+<div id="app">
+    <ul>
+        <li v-for="(ingredient, i) in ingredients" :key="ingredient">
+            {{ ingredient }} ({{ i }})
+        </li>
+    </ul>
+    <button @click="ingredients.push('spices')">Push</button>
+    <template v-for="(ingredient, index) in ingredients">
+        <h4>{{ ingredient }}</h4>
+        <p>{{ index }}</p>
+    </template>
 
-        <p v-if="show">You can see me!</p>
-        <p v-else> Naw you can see me!</p>
-        <p v-show="show">Do you also see me?</p>
+    <hr>
+    <ul>
+        <li v-for="person in persons">
+            <span v-for="(value, key, index) in person">
+                ({{index}}){{key}}: {{ value }}
+            </span>
+        </li>
+    </ul>
+    <hr>
 
-        <template v-if="show">
-            <h1> Heading </h1>
-            <p> Inside a template </p>
-        </template>
 
-        <button @click="show =!show">Swich</button>
+    <p>Persons</p>
 
-
+    <div v-for="person in persons">
+        <p>Name: {{ person.name }}</p>
+        <p>Age: {{ person.age }}</p>
+        <p>Color: {{ person.color }}</p>
+        <hr>
     </div>
-    <script src="app.js"></script>
+
+    <span v-for="n in 10">{{n}}</span>
+</div>
+<script src="app.js"></script>
 </body>
 </html>
