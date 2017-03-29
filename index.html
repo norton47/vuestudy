@@ -3,44 +3,63 @@
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/foundation/6.3.1/css/foundation.css">
+    <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
 <script src="https://unpkg.com/vue@2.2.5">
 </script>
 <div id="app">
-    <ul>
-        <li v-for="(ingredient, i) in ingredients" :key="ingredient">
-            {{ ingredient }} ({{ i }})
-        </li>
-    </ul>
-    <button @click="ingredients.push('spices')">Push</button>
-    <template v-for="(ingredient, index) in ingredients">
-        <h4>{{ ingredient }}</h4>
-        <p>{{ index }}</p>
-    </template>
 
-    <hr>
-    <ul>
-        <li v-for="person in persons">
-            <span v-for="(value, key, index) in person">
-                ({{index}}){{key}}: {{ value }}
-            </span>
-        </li>
-    </ul>
-    <hr>
+    <section class="row">
+        <div class="small-6 columns">
+            <h1 class="text-center"> YOU </h1>
+            <div class="healthbar">
+                <div class="healthbar text-center"
+                     style="background-color: green; margin: 0; color:white"
+                     :style="{width: playerHealth + '%'}">
+                    {{ playerHealth }}
+                </div>
+            </div>
+        </div>
+        <div class="small-6 columns">
+            <h1 class="text-center">MONSTER</h1>
+            <div class="healthbar">
+                <div class="healthbar text-center"
+                     style="background-color: green; margin: 0; color:white"
+                     :style="{width: monsterHealth + '%'}">
+                    {{ monsterHealth }}
+                </div>
+            </div>
+        </div>
+    </section>
 
+    <section class="row controls" v-if="!gameIsRunning">
+        <div class="small-12 columns">
+            <button id="start-game" @click="startGame">START NEW GAME</button>
+        </div>
+    </section>
 
-    <p>Persons</p>
+    <section class="row controls" v-else>
+        <div class="small-12 columns">
+            <button id="attack" @click="attach">ATTACK</button>
+            <button id="special-attack" @click="specialAttack">SPECIAL ATTACK</button>
+            <button id="heal" @click="heal">HEAL</button>
+            <button id="give-up" @click="giveUp">GIVE UP</button>
+        </div>
+    </section>
 
-    <div v-for="person in persons">
-        <p>Name: {{ person.name }}</p>
-        <p>Age: {{ person.age }}</p>
-        <p>Color: {{ person.color }}</p>
-        <hr>
-    </div>
+    <section class="row log" v-if="turns.length > 0">
+        <div class="small-12 columns">
+            <ul>
+                <li v-for="turn in turns"
+                    :class="{'player-turn': turn.isPlayer, 'monster-turn': !turn.isPlayer}">
+                    {{turn.text }}
+                </li>
+            </ul>
+        </div>
+    </section>
 
-    <span v-for="n in 10">{{n}}</span>
 </div>
 <script src="app.js"></script>
 </body>
